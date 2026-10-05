@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de Estudio Integral - Física ULEAM</title>
+    <style>
+        :root {
+            --primary: #1E3A8A;
+            --secondary: #3B82F6;
+            --bg: #F3F4F6;
+            --card: #FFFFFF;
+            --text: #1F2937;
+            --accent: #10B981;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 0 15px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; }
+        }
+        .card {
+            background: var(--card);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        .full-width { grid-column: 1 / -1; }
+        h2 { color: var(--primary); border-bottom: 2px solid #E5E7EB; padding-bottom: 8px; margin-top: 0; font-size: 1.2rem; }
+        
+        /* Alertas */
+        .alert-box {
+            background-color: #FEF3C7;
+            border-left: 4px solid #F59E0B;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #92400E;
+        }
+
+        /* Tareas Moodle */
+        .task-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        .task-item label { cursor: pointer; }
+
+        /* Examen Interactivo */
+        .question { margin-bottom: 15px; }
+        .options label { display: block; margin: 5px 0; cursor: pointer; }
+        button {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover { background-color: #2563EB; }
+        .score { font-size: 1.1rem; font-weight: bold; margin-top: 10px; color: var(--accent); }
+
+        /* Apartado Interesante */
+        .curiosity {
+            background-color: #ECFDF5;
+            border-left: 4px solid var(--accent);
+            padding: 12px;
+            border-radius: 4px;
+            color: #065F46;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Plataforma Académica Personalizada</h1>
+        <p>Preparación anticipada y evaluación autónoma - Master Barista Workshop & ULEAM</p>
+    </header>
+
+    <div class="container">
+
+        <!-- 1. Aviso Constante y Planificación del Día Anterior -->
+        <div class="card full-width">
+            <h2>1. Planificador y Aviso Previo (Estudio para Mañana)</h2>
+            <div class="alert-box" id="avisoAviso">
+                🔔 Aviso Activo: Mañana tiene clase de Física Aplicada. Su sesión de estudio programada con 1 día de anticipación incluye: Repaso de Leyes de Newton y Deformación Elástica.
+            </div>
+            <p><strong>Meta para hoy:</strong> Completar el resumen teórico, revisar las tareas pendientes en la plataforma y realizar la autoevaluación para llegar completamente preparado a la cátedra.</p>
+        </div>
+
+        <!-- 2. Resumen del Tema Preparado con Antelación -->
+        <div class="card">
+            <h2>2. Resumen del Tema (Preparado con Anticipación)</h2>
+            <h3>Módulo: Dinámica y Elasticidad</h3>
+            <p><strong>Segunda Ley de Newton:</strong> Establece que la fuerza neta aplicada sobre un cuerpo es proporcional a su aceleración ($\Sigma F = m \cdot a$). Fundamental para calcular esfuerzos mecánicos en equipos de procesamiento de alimentos.</p>
+            <p><strong>Módulo de Young ($E$):</strong> Relaciona el esfuerzo axial con la deformación unitaria ($\Delta L = \frac{F \cdot L}{E \cdot A}$). Vital para dimensionar tuberías y tanques de acero inoxidable.</p>
+        </div>
+
+        <!-- 3. Tareas Pendientes de Moodle -->
+        <div class="card">
+            <h2>3. Tareas Pendientes de Moodle</h2>
+            <div id="moodleTaskList">
+                <div class="task-item">
+                    <label><input type="checkbox" onchange="actualizarProgreso()"> Resolver 5 ejercicios de Dinámica de fluidos</label>
+                    <span style="color: #DC2626; font-size: 0.85rem;">Fecha límite: Mañana</span>
+                </div>
+                <div class="task-item">
+                    <label><input type="checkbox" onchange="actualizarProgreso()"> Subir informe de Análisis de Esfuerzos</label>
+                    <span style="color: #D97706; font-size: 0.85rem;">En 2 días</span>
+                </div>
+                <div class="task-item">
+                    <label><input type="checkbox" onchange="actualizarProgreso()"> Revisar cuestionario previo de Termodinámica</label>
+                    <span style="color: #059669; font-size: 0.85rem;">Completado</span>
+                </div>
+            </div>
+            <p id="progresoTareas" style="margin-top: 15px; font-weight: bold; color: var(--secondary);">Tareas completadas: 1 / 3</p>
+        </div>
+
+        <!-- 4. Pruebas Interactivas (Examen Autónomo) -->
+        <div class="card full-width">
+            <h2>4. Pruebas Interactivas para Validación Autónoma (Toma de Examen)</h2>
+            <form id="quizForm">
+                <div class="question">
+                    <p><strong>Pregunta 1:</strong> ¿Cuál es la unidad de medida del Módulo de Young ($E$) en el Sistema Internacional?</p>
+                    <div class="options">
+                        <label><input type="radio" name="p1" value="a"> A) Newton (N)</label>
+                        <label><input type="radio" name="p1" value="b"> B) Pascales (Pa o $N/m^2$)</label>
+                        <label><input type="radio" name="p1" value="c"> C) Joules (J)</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p><strong>Pregunta 2:</strong> Si se duplica la fuerza aplicada a una barra elástica dentro de su límite proporcional, su alargamiento ($\Delta L$):</p>
+                    <div class="options">
+                        <label><input type="radio" name="p2" value="a"> A) Se reduce a la mitad</label>
+                        <label><input type="radio" name="p2" value="b"> B) Permanece constante</label>
+                        <label><input type="radio" name="p2" value="c"> C) También se duplica</label>
+                    </div>
+                </div>
+
+                <button type="button" onclick="calificarExamen()">Enviar y Evaluar Examen</button>
+            </form>
+            <div class="score" id="resultadoExamen"></div>
+        </div>
+
+        <!-- 5. Apartado Interesante -->
+        <div class="card full-width">
+            <h2>5. Apartado Interesante: Aplicación en Ingeniería</h2>
+            <div class="curiosity">
+                <p><strong>¿Sabía que...?</strong> En la industria alimentaria, el conocimiento preciso de la resistencia de materiales y la elasticidad previene fallas catastróficas en autoclaves de esterilización y reactores industriales que operan bajo presiones y temperaturas extremas. ¡Estudiar estas bases de física asegura la inocuidad y la eficiencia en los procesos agroindustriales!</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function actualizarProgreso() {
+            let checkboxes = document.querySelectorAll('#moodleTaskList input[type="checkbox"]');
+            let completadas = 0;
+            checkboxes.forEach(chk => {
+                if (chk.checked) completadas++;
+            });
+            document.getElementById('progresoTareas').innerText = `Tareas completadas: ${completadas} / ${checkboxes.length}`;
+        }
+
+        function calificarExamen() {
+            let p1 = document.querySelector('input[name="p1"]:checked');
+            let p2 = document.querySelector('input[name="p2"]:checked');
+            let puntaje = 0;
+
+            if (p1 && p1.value === 'b') puntaje += 50;
+            if (p2 && p2.value === 'c') puntaje += 50;
+
+            let mensajeRes = `Su calificación autónoma es: ${puntaje} / 100 puntos. `;
+            if (puntaje === 100) {
+                mensajeRes += "¡Excelente dominio de los conceptos clave para mañana!";
+            } else {
+                mensajeRes += "Le sugerimos repasar el resumen teórico superior antes de su clase.";
+            }
+            document.getElementById('resultadoExamen').innerText = mensajeRes;
+        }
+    </script>
+
+</body>
+</html>
